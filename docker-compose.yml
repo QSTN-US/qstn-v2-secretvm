@@ -1,0 +1,11 @@
+services:
+  qstn-secretvm:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - INTER_SERVICE_SECRET=${INTER_SERVICE_SECRET}
+      - INTER_SERVICE_EXPIRES=${INTER_SERVICE_EXPIRES}
+    restart: unless-stopped
