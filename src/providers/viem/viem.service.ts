@@ -8,9 +8,9 @@ import { WalletChainIdEnum } from './viem.type'
 
 @Injectable()
 export class ViemService {
-  constructor(private readonly configService: AppConfigService, private readonly logger: Logger) {
-    this.logger = new Logger(ViemService.name)
-  }
+  private readonly logger = new Logger(ViemService.name)
+
+  constructor(private readonly configService: AppConfigService) {}
 
   getChain(chainId: string): {
     chain: Chain
