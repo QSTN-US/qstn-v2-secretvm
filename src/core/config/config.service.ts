@@ -12,6 +12,14 @@ export class AppConfigService extends ConfigService<EnvironmentDTO> {
     return <number>this.get('PORT')
   }
 
+  get polygonMainnetAddress(): string {
+    return <string>this.get('POLYGON_MAINNET_ADDRESS')
+  }
+
+  get polygonTestnetAddress(): string {
+    return <string>this.get('POLYGON_TESTNET_ADDRESS')
+  }
+
   get interService() {
     return {
       secret: <string>this.get('INTER_SERVICE_SECRET'),
