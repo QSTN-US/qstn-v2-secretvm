@@ -25,6 +25,14 @@ export class EnvironmentDTO {
   @IsDefined()
   @IsString()
   INTER_SERVICE_EXPIRES: string = '30s'
+
+  @IsDefined()
+  @IsString()
+  POLYGON_MAINNET_ADDRESS: string = ''
+
+  @IsDefined()
+  @IsString()
+  POLYGON_TESTNET_ADDRESS: string = ''
 }
 
 export const validate = (config: Record<string, unknown>): EnvironmentDTO => {

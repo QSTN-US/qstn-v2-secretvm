@@ -11,7 +11,11 @@ export class VerifyRequestDto {
 
   @IsString()
   @IsNotEmpty()
-  provider_id!: string
+  user_wallet!: string
+
+  @IsString()
+  @IsNotEmpty()
+  chain_id!: string
 }
 
 export class VerifyResponseDto {
