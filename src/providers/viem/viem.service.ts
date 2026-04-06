@@ -37,24 +37,36 @@ export class ViemService {
     reward: { walletAddress: string; amount: number },
     chainId: string,
   ): Promise<boolean> {
-    const { chain } = this.getChain(chainId)
+    try {
+      const { chain } = this.getChain(chainId)
 
-    const client = createPublicClient({
-      chain,
-      transport: http(),
-    })
+      const client = createPublicClient({
+        chain,
+        transport: http(),
+      })
 
-    const dispatcherAddress = this.getDispatcherAddress(chainId) as `0x${string}`
+      const dispatcherAddress = this.getDispatcherAddress(chainId) as `0x${string}`
 
-    const contract = getContract({
-      address: dispatcherAddress,
-      abi: polReward,
-      client,
-    })
+      const contract = getContract({
+        address: dispatcherAddress,
+        abi: polReward,
+        client,
+      })
 
-    const result = await contract.read.getNativeValueFor([reward.walletAddress as `0x${string}`])
+      const result = await contract.read.getNativeValueFor([reward.walletAddress as `0x${string}`])
 
-    return result > 0
+      return result > 0
+    } catch (e) {
+      this.logger.error('Failed to verify reward claim', {
+        error: e instanceof Error ? e.message : String(e),
+        stack: e instanceof Error ? e.stack : undefined,
+        walletAddress: reward.walletAddress,
+        amount: reward.amount,
+        chainId,
+      })
+
+      return false
+    }
   }
 
   getDispatcherAddress(chainId: string): string {
