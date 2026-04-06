@@ -63,6 +63,7 @@ export class ViemService {
         walletAddress: reward.walletAddress,
         amount: reward.amount,
         chainId,
+        timestamp: new Date().toISOString(),
       })
 
       return false
