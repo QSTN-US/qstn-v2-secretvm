@@ -1,11 +1,8 @@
+version: "3"
 services:
-  qstn-secretvm:
-    build: .
+  app:
+    image: ghcr.io/qstn-us/qstn-v2-secretvm:v1.1.1
     ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-      - NODE_ENV=production
-      - INTER_SERVICE_SECRET=${INTER_SERVICE_SECRET}
-      - INTER_SERVICE_EXPIRES=${INTER_SERVICE_EXPIRES}
-    restart: unless-stopped
+      - "3000"
+    env_file:
+      - usr/.env
